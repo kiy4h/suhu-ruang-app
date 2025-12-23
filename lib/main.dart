@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: ".env");
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    print('Firebase initialized successfully');
+  } catch (e) {
+    print('Firebase initialization error: $e');
+  }
+  
   runApp(const MyApp());
 }
 
@@ -17,7 +22,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: const ACControlScreen(), theme: ThemeData.dark());
+    return MaterialApp(home: const ACControlScreen(), theme: ThemeData(primarySwatch: Colors.blue));
   }
 }
 
@@ -70,9 +75,17 @@ class _ACControlScreenState extends State<ACControlScreen> {
                 activeColor: Colors.blue,
               ),
             ),
-            Text(acStatus ? "AC Sedang NYALA" : "AC MATI", style: TextStyle(fontSize: 20)),
-            
-            const SizedBox(height: 40),
+            // Indikator Status AC
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.ac_unit, color: acStatus ? Colors.blue : Colors.grey),
+                Text(" Status AC: ${acStatus ? 'ON' : 'OFF'}", 
+                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+              ],
+            ),
+
+            const SizedBox(height: 50),
 
             // Cooldown Timer Display
             if (isCountingDown) ...[

@@ -7,11 +7,14 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
-import 'firebase_options.dart';
-// ...
-await Firebase.initializeApp(
-  options: DefaultFirebaseOptions.currentPlatform,
-);
+/// Example:
+/// ```dart
+/// import 'firebase_options.dart';
+/// // ...
+/// await Firebase.initializeApp(
+///   options: DefaultFirebaseOptions.currentPlatform,
+/// );
+/// ```
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
@@ -38,8 +41,8 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: String.fromEnvironment('FIREBASE_WEB_API_KEY', defaultValue: ''),
+  static FirebaseOptions get web => FirebaseOptions(
+    apiKey: dotenv.env['FIREBASE_WEB_API_KEY'] ?? '',
     appId: '1:856468331360:web:187fac3d3b3e8048be5c05',
     messagingSenderId: '856468331360',
     projectId: 'sensor-suhu-kiyah',
@@ -49,8 +52,8 @@ class DefaultFirebaseOptions {
     measurementId: 'G-QFMCTY3PWN',
   );
 
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: String.fromEnvironment('FIREBASE_ANDROID_API_KEY', defaultValue: ''),
+  static FirebaseOptions get android => FirebaseOptions(
+    apiKey: dotenv.env['FIREBASE_ANDROID_API_KEY'] ?? '',
     appId: '1:856468331360:android:f73ae85e01533fe8be5c05',
     messagingSenderId: '856468331360',
     projectId: 'sensor-suhu-kiyah',
@@ -58,8 +61,8 @@ class DefaultFirebaseOptions {
     storageBucket: 'sensor-suhu-kiyah.firebasestorage.app',
   );
 
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: String.fromEnvironment('FIREBASE_IOS_API_KEY', defaultValue: ''),
+  static FirebaseOptions get ios => FirebaseOptions(
+    apiKey: dotenv.env['FIREBASE_IOS_API_KEY'] ?? '',
     appId: '1:856468331360:ios:e25dde5ffc4da687be5c05',
     messagingSenderId: '856468331360',
     projectId: 'sensor-suhu-kiyah',
@@ -68,8 +71,8 @@ class DefaultFirebaseOptions {
     iosBundleId: 'com.example.sensorSuhuKiyah',
   );
 
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: String.fromEnvironment('FIREBASE_MACOS_API_KEY', defaultValue: ''),
+  static FirebaseOptions get macos => FirebaseOptions(
+    apiKey: dotenv.env['FIREBASE_MACOS_API_KEY'] ?? '',
     appId: '1:856468331360:ios:e25dde5ffc4da687be5c05',
     messagingSenderId: '856468331360',
     projectId: 'sensor-suhu-kiyah',
@@ -78,8 +81,8 @@ class DefaultFirebaseOptions {
     iosBundleId: 'com.example.sensorSuhuKiyah',
   );
 
-  static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: String.fromEnvironment('FIREBASE_WINDOWS_API_KEY', defaultValue: ''),
+  static FirebaseOptions get windows => FirebaseOptions(
+    apiKey: dotenv.env['FIREBASE_WINDOWS_API_KEY'] ?? '',
     appId: '1:856468331360:web:264e05aff26fc2ffbe5c05',
     messagingSenderId: '856468331360',
     projectId: 'sensor-suhu-kiyah',
